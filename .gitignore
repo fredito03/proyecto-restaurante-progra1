@@ -1,0 +1,34 @@
+# IntelliJ project files
+.idea/
+./restaurante
+
+
+# Compiled class file
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Maven target directory
+target/
+
+# Gradle build directory
+build/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# NetBeans project files
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
