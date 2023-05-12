@@ -6,9 +6,9 @@ public class menu extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JList list1;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton ingresosButton;
+    private JButton recursosButton;
+    private JButton estadoButton;
 
     public menu() {
         setContentPane(contentPane);
