@@ -1,7 +1,10 @@
+package menu;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 public class menu extends JDialog {
+    private final controlador controlador = new controlador();
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -26,6 +29,10 @@ public class menu extends JDialog {
                 onCancel();
             }
         });
+
+        ingresosButton.addActionListener(e -> controlador.controladorIngresos());
+        recursosButton.addActionListener(e -> System.out.println("Hola estoy en recursos"));
+        estadoButton.addActionListener(e -> System.out.println("Hola estoy en estado"));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
