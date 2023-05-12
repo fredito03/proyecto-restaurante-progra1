@@ -6,6 +6,12 @@ public class controlador {
     }
 
 
+
+    public void controladorEstado(){
+        System.out.println("Estoy en estado");
+    }
+
+
     public static void main(String[] args) {
 
     }
