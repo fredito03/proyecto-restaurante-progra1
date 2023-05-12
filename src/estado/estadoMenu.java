@@ -1,14 +1,14 @@
-package ingresos;
+package estado;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ingresosMenu extends JDialog {
+public class estadoMenu extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
 
-    public ingresosMenu() {
+    public estadoMenu() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -52,7 +52,7 @@ public class ingresosMenu extends JDialog {
     }
 
     public static void main(String[] args) {
-        ingresosMenu dialog = new ingresosMenu();
+        estadoMenu dialog = new estadoMenu();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
