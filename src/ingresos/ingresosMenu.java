@@ -7,6 +7,10 @@ public class ingresosMenu extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JList list1;
+    private JButton agregarButton;
+    private JTextField textField1;
+    private JTable table1;
 
     public ingresosMenu() {
         setContentPane(contentPane);
