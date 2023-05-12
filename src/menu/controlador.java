@@ -2,7 +2,8 @@ package menu;
 public class controlador {
 
     public void controladorIngresos(){
-        System.out.println("Estoy en ingresos");
+
+
     }
 
 
