@@ -31,7 +31,7 @@ public class menu extends JDialog {
         });
 
         ingresosButton.addActionListener(e -> controlador.controladorIngresos());
-        recursosButton.addActionListener(e -> System.out.println("Hola estoy en recursos"));
+        recursosButton.addActionListener(e -> controlador.controladorRecursos());
         estadoButton.addActionListener(e -> controlador.controladorEstado());
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
