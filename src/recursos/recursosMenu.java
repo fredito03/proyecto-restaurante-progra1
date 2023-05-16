@@ -7,6 +7,9 @@ public class recursosMenu extends JFrame {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JTextField textField1;
+    private JButton agregarButton;
+    private JTable table1;
 
     public recursosMenu() {
         setTitle("Menu Recursos");
