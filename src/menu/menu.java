@@ -1,5 +1,7 @@
 package menu;
 
+import ingresos.ingresosMenu;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -30,23 +32,14 @@ public class menu extends JDialog {
             }
         });
 
-        ingresosButton.addActionListener(e -> controlador.controladorIngresos());
+        ingresosButton.addActionListener(e -> {
+            controlador.controladorIngresos();
+            ingresosMenu ingresosMenu = new ingresosMenu();
+            ingresosMenu.setVisible(true);
+        });
         recursosButton.addActionListener(e -> controlador.controladorRecursos());
         estadoButton.addActionListener(e -> controlador.controladorEstado());
         // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {

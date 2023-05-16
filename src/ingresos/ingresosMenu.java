@@ -1,11 +1,14 @@
 package ingresos;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.JOptionPane;
 import java.awt.event.*;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-public class ingresosMenu extends JDialog {
+import menu.menu;
+
+public class ingresosMenu extends JDialog{
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -13,28 +16,46 @@ public class ingresosMenu extends JDialog {
     private JButton agregarButton;
     private JTextField textField1;
     private JTable table1;
+    private DefaultTableModel modelo;
+
+    controlador controlador = new controlador();
 
     public ingresosMenu() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("Proyecto Programacion");
+        setLocation(512, 200);
+        setMinimumSize(new java.awt.Dimension(500, 400));
         getRootPane().setDefaultButton(buttonOK);
-        final int[] menuSeleccionado = {0};
-        controlador controlador = new controlador();
+        iniciarBotones();
+        iniciarTabla();
+        // Default
+        iniciarBotonesDeAccion();
+    }
 
+    public void iniciarBotones(){
         list1.addListSelectionListener(e -> {
-            textField1.setText(list1.getSelectedValue().toString());
-            menuSeleccionado[0] = list1.getSelectedIndex();
+            String productoSeleccionado = list1.getSelectedValue() != null ? list1.getSelectedValue().toString() : "";
+            textField1.setText(productoSeleccionado);
         });
 
         agregarButton.addActionListener(e -> {
-            controlador.agregaMenu(menuSeleccionado[0]);
+            agregarProducto(list1.getSelectedIndex(), list1.getSelectedValue());
         });
+    }
 
+    public void iniciarTabla(){
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        table1.setModel(modelo);
+    }
 
-        // Default
+    public void iniciarBotonesDeAccion(){
+        // Inicializa los botones de cancelar y ok de la ventana
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                regresarAMenuPrincipal();
             }
         });
         buttonCancel.addActionListener(new ActionListener() {
@@ -42,18 +63,25 @@ public class ingresosMenu extends JDialog {
                 onCancel();
             }
         });
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    public void agregarProducto(int id, Object nombre) {
+        boolean hayalgunProductoSeleccionado = list1.isSelectionEmpty();
+        if(!hayalgunProductoSeleccionado){
+            controlador.agregaMenu(id);
+            Object[] fila = {id, nombre};
+            modelo.addRow(fila);
+            textField1.setText("");
+            list1.clearSelection();
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un item de la lista");
+        }
+    }
+
+    private void regresarAMenuPrincipal() {
+        menu menuPrincipal = new menu();
+        menuPrincipal.setVisible(true);
+        setVisible(false);
     }
 
     private void onCancel() {
@@ -61,10 +89,14 @@ public class ingresosMenu extends JDialog {
         dispose();
     }
 
+    // create method to close current window
+
+
     public static void main(String[] args) {
         ingresosMenu dialog = new ingresosMenu();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
     }
+    
 }
