@@ -2,6 +2,7 @@ package menu;
 
 import estado.estadoMenu;
 import ingresos.ingresosMenu;
+import recursos.recursosMenu;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -42,7 +43,14 @@ public class menu extends JFrame {
             ingresosMenu.setVisible(true);
             dispose();
         });
-        recursosButton.addActionListener(e -> controlador.controladorRecursos());
+        recursosButton.addActionListener(e -> {
+            controlador.controladorRecursos();
+            recursosMenu recursosMenu = new recursosMenu();
+            recursosMenu.setVisible(true);
+            dispose();
+        });
+
+
         estadoButton.addActionListener(e -> {
             controlador.controladorEstado();
             estadoMenu estadoMenu = new estadoMenu();

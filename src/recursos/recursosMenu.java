@@ -9,7 +9,7 @@ public class recursosMenu extends JFrame {
     private JButton buttonCancel;
 
     public recursosMenu() {
-        setTitle("Cambiar nombre");
+        setTitle("Menu Recursos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(512, 200);
         setMinimumSize(new java.awt.Dimension(500, 400));
