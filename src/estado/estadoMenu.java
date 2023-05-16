@@ -3,14 +3,18 @@ package estado;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class estadoMenu extends JDialog {
+public class estadoMenu extends JFrame {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
 
     public estadoMenu() {
+        setTitle("Cambiar nombre");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(512, 200);
+        setMinimumSize(new java.awt.Dimension(500, 400));
+
         setContentPane(contentPane);
-        setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -55,6 +59,5 @@ public class estadoMenu extends JDialog {
         estadoMenu dialog = new estadoMenu();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
     }
 }

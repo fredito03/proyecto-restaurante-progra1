@@ -5,6 +5,5 @@ public class Main {
         menu dialog = new menu();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
     }
 }
