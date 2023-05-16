@@ -3,14 +3,17 @@ package recursos;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class recursosMenu extends JDialog {
+public class recursosMenu extends JFrame {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
 
     public recursosMenu() {
+        setTitle("Cambiar nombre");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(512, 200);
+        setMinimumSize(new java.awt.Dimension(500, 400));
         setContentPane(contentPane);
-        setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -55,6 +58,5 @@ public class recursosMenu extends JDialog {
         recursosMenu dialog = new recursosMenu();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
     }
 }
