@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 import menu.menu;
 
-public class ingresosMenu extends JDialog{
+public class ingresosMenu extends JFrame{
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -21,15 +21,14 @@ public class ingresosMenu extends JDialog{
     controlador controlador = new controlador();
 
     public ingresosMenu() {
+        setTitle("Menu de ingresos");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(contentPane);
-        setModal(true);
-        setTitle("Proyecto Programacion");
         setLocation(512, 200);
         setMinimumSize(new java.awt.Dimension(500, 400));
         getRootPane().setDefaultButton(buttonOK);
         iniciarBotones();
         iniciarTabla();
-        // Default
         iniciarBotonesDeAccion();
     }
 
@@ -93,10 +92,9 @@ public class ingresosMenu extends JDialog{
 
 
     public static void main(String[] args) {
-        ingresosMenu dialog = new ingresosMenu();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+        ingresosMenu frame = new ingresosMenu();
+        frame.pack();
+        frame.setVisible(true);
     }
-    
+
 }
