@@ -61,11 +61,14 @@ public class menu extends JFrame {
     }
 
     private void onOK() {
+
         dispose();
+        System.exit(0);
     }
 
     private void onCancel() {
         dispose();
+        System.exit(0);
     }
 
     public static void main(String[] args) {

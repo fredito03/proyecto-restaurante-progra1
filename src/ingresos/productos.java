@@ -1,17 +1,36 @@
 package ingresos;
+import java.util.ArrayList;
+import java.util.List;
 
-public class controlador {
-    Cola cola = new Cola();
-    Pila pila = new Pila();
-    public void agregaMenu(int menu){
-        cola.agregar(menu);
-        pila.insertar(menu);
-        System.out.println("Cola:");
-        cola.imprimirCola();
-        System.out.println("Pila:");
-        pila.imprimir();
+public class productos {
+    private static productos instance;
+    private Cola colaProductos;
+    private Pila pilaProductos;
+
+    private productos() {
+        colaProductos = new Cola();
+        pilaProductos = new Pila();
     }
 
+    public static productos getSingletonInstance() {
+        if (instance == null) {
+            instance = new productos();
+        }
+        return instance;
+    }
+
+    public void agregarProducto(int producto) {
+        colaProductos.agregar(producto);
+        pilaProductos.insertar(producto);
+    }
+
+    public Pila obtenerProductosPila() {
+        return pilaProductos;
+    }
+
+    public Cola obtenerProductosCola() {
+        return colaProductos;
+    }
 }
 
 class Nodo {

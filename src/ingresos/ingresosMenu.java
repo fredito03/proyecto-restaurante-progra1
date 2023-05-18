@@ -18,7 +18,7 @@ public class ingresosMenu extends JFrame{
     private JTable table1;
     private DefaultTableModel modelo;
 
-    controlador controlador = new controlador();
+    productos productos = ingresos.productos.getSingletonInstance();
 
     public ingresosMenu() {
         setTitle("Menu de ingresos");
@@ -66,7 +66,7 @@ public class ingresosMenu extends JFrame{
     public void agregarProducto(int id, Object nombre) {
         boolean hayalgunProductoSeleccionado = list1.isSelectionEmpty();
         if(!hayalgunProductoSeleccionado){
-            controlador.agregaMenu(id);
+            productos.agregarProducto(id);
             Object[] fila = {id, nombre};
             modelo.addRow(fila);
             textField1.setText("");
@@ -85,6 +85,7 @@ public class ingresosMenu extends JFrame{
     private void onCancel() {
         // add your code here if necessary
         dispose();
+        System.exit(0);
     }
 
     // create method to close current window

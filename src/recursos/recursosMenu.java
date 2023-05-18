@@ -1,17 +1,24 @@
 package recursos;
 
+import menu.menu;
+
 import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
 public class recursosMenu extends JFrame {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textField1;
+    private JTextField textFieldNombre;
     private JButton agregarButton;
     private JTable table1;
-    private JList list1;
+    private JList listaTurnos;
 
+    private DefaultTableModel modelo;
+
+    meseros meseros = recursos.meseros.obtenerInstancia();
     public recursosMenu() {
         setTitle("Menu Recursos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,6 +26,7 @@ public class recursosMenu extends JFrame {
         setMinimumSize(new java.awt.Dimension(500, 400));
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
+        iniciarTabla();
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -32,30 +40,47 @@ public class recursosMenu extends JFrame {
             }
         });
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
+        agregarButton.addActionListener(e -> {
+            agregarMesero();
         });
+    }
 
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    public void iniciarTabla(){
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Turno");
+        Object[] listaMeseros = meseros.obtenerListaMeseros();
+        for (Object mesero : listaMeseros) {
+            Object[] fila = (Object[]) mesero;
+            modelo.addRow(fila);
+        }
+        table1.setModel(modelo);
+    }
+
+    private void agregarMesero(){
+        String nombre = textFieldNombre.getText();
+        String turno = listaTurnos.getSelectedValue().toString();
+        if(nombre.equals("") || turno.equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor llena todos los campos", "Error al agrega mesero", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Object[] fila = {nombre, turno};
+        modelo.addRow(fila);
+        meseros.agregarMesero(nombre, turno);
+        textFieldNombre.setText("");
+        listaTurnos.setSelectedIndex(0);
+        JOptionPane.showMessageDialog(null, "Mesero agregado conexito");
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        menu menuPrincipal = new menu();
+        menuPrincipal.setVisible(true);
+        setVisible(false);
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
+        System.exit(0);
     }
 
     public static void main(String[] args) {
