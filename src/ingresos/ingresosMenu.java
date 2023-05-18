@@ -51,7 +51,6 @@ public class ingresosMenu extends JFrame{
     }
 
     public void iniciarBotonesDeAccion(){
-        // Inicializa los botones de cancelar y ok de la ventana
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 regresarAMenuPrincipal();
