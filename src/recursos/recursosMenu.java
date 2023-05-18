@@ -10,6 +10,7 @@ public class recursosMenu extends JFrame {
     private JTextField textField1;
     private JButton agregarButton;
     private JTable table1;
+    private JList list1;
 
     public recursosMenu() {
         setTitle("Menu Recursos");
