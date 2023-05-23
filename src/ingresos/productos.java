@@ -1,121 +1,120 @@
 package ingresos;
 import java.util.ArrayList;
-import java.util.List;
-
 public class productos {
     private static productos instance;
-    private Cola colaProductos;
-    private Pila pilaProductos;
-
+    private ColaProductos colaProductos;
+    private PilaProductos pilaProductos;
     private productos() {
-        colaProductos = new Cola();
-        pilaProductos = new Pila();
+        colaProductos = new ColaProductos();
+        pilaProductos = new PilaProductos();
     }
-
-    public static productos getSingletonInstance() {
+    public static productos obtenerInstancia() {
         if (instance == null) {
             instance = new productos();
         }
         return instance;
     }
-
-    public void agregarProducto(int producto) {
-        colaProductos.agregar(producto);
-        pilaProductos.insertar(producto);
+    public void agregarProducto(int id, String nombre) {
+        colaProductos.agregar(id, nombre);
+        pilaProductos.agregar(id, nombre);
     }
-
-    public Pila obtenerProductosPila() {
-        return pilaProductos;
+    public Object[] obtenerProductosDeCola() {
+        try{
+            return colaProductos.obtenerProductos();
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
-
-    public Cola obtenerProductosCola() {
-        return colaProductos;
-    }
-}
-
-class Nodo {
-    int dato;
-    Nodo siguiente;
-
-    public Nodo(int dato) {
-        this.dato = dato;
-        this.siguiente = null;
+    public Object[] obtenerProductosDePila() {
+        try{
+            return pilaProductos.obtenerProductos();
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 }
 
-class Pila {
-    Nodo tope;
+class ColaProductos {
+    private static class Nodo {
+        private int id;
+        private String nombre;
+        private Nodo siguiente;
 
-    public Pila() {
-        this.tope = null;
+        public Nodo(int id, String nombre) {
+            this.id = id;
+            this.nombre = nombre;
+            this.siguiente = null;
+        }
     }
 
-    public void insertar(int dato) {
-        Nodo nuevoNodo = new Nodo(dato);
+    private Nodo primerNodo;
+    private Nodo ultimoNodo;
+
+    public ColaProductos() {
+        primerNodo = null;
+        ultimoNodo = null;
+    }
+
+    public void agregar(int id, String nombre) {
+        Nodo nuevoNodo = new Nodo(id, nombre);
+        if (primerNodo == null) {
+            primerNodo = nuevoNodo;
+            ultimoNodo = nuevoNodo;
+        } else {
+            ultimoNodo.siguiente = nuevoNodo;
+            ultimoNodo = nuevoNodo;
+        }
+    }
+
+    public Object[] obtenerProductos() {
+        ArrayList<Object> productos = new ArrayList<>();
+        Nodo actual = primerNodo;
+        while (actual != null) {
+            Object[] producto = {actual.id, actual.nombre};
+            productos.add(producto);
+            actual = actual.siguiente;
+        }
+        return productos.toArray();
+    }
+
+}
+
+class PilaProductos {
+    private static class Nodo {
+        private int id;
+        private String nombre;
+        private Nodo siguiente;
+
+        public Nodo(int id, String nombre) {
+            this.id = id;
+            this.nombre = nombre;
+            this.siguiente = null;
+        }
+    }
+
+    private Nodo tope;
+
+    public PilaProductos() {
+        tope = null;
+    }
+
+    public void agregar(int id, String nombre) {
+        Nodo nuevoNodo = new Nodo(id, nombre);
         nuevoNodo.siguiente = tope;
         tope = nuevoNodo;
     }
 
-    public void imprimir() {
+    public Object[] obtenerProductos() {
+        ArrayList<Object> productos = new ArrayList<>();
         Nodo actual = tope;
         while (actual != null) {
-            System.out.print(actual.dato + " ");
+            Object[] producto = {actual.id, actual.nombre};
+            productos.add(producto);
             actual = actual.siguiente;
         }
-        System.out.println();
-    }
-}
-
-class Cola {
-    private Nodo primerNodo;
-    private Nodo ultimoNodo;
-
-    public void agregar(int elemento) {
-        Nodo nuevoNodo = new Nodo(elemento);
-
-        if (estaVacia()) {
-            primerNodo = nuevoNodo;
-        } else {
-            ultimoNodo.siguiente = nuevoNodo;
-        }
-
-        ultimoNodo = nuevoNodo;
+        return productos.toArray();
     }
 
-    public int imprimir() {
-        if (estaVacia()) {
-            throw new IllegalStateException("La cola está vacía");
-        }
-
-        int elemento = primerNodo.elemento;
-        primerNodo = primerNodo.siguiente;
-
-        if (primerNodo == null) {
-            ultimoNodo = null;
-        }
-
-        return elemento;
-    }
-
-    // create a method to print the elements of the queue
-    public void imprimirCola() {
-        Nodo temp = primerNodo;
-        while (temp != null) {
-            System.out.println(temp.elemento);
-            temp = temp.siguiente;
-        }
-    }
-
-    public boolean estaVacia() {
-        return primerNodo == null;
-    }
-
-    private static class Nodo {
-        private final int elemento;
-        private Nodo siguiente;
-
-        public Nodo(int elemento) {
-            this.elemento = elemento;
-        }
-    }
 }

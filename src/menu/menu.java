@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class menu extends JFrame {
-    private final controlador controlador = new controlador();
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -38,13 +37,11 @@ public class menu extends JFrame {
         });
 
         ingresosButton.addActionListener(e -> {
-            controlador.controladorIngresos();
             ingresosMenu ingresosMenu = new ingresosMenu();
             ingresosMenu.setVisible(true);
             dispose();
         });
         recursosButton.addActionListener(e -> {
-            controlador.controladorRecursos();
             recursosMenu recursosMenu = new recursosMenu();
             recursosMenu.setVisible(true);
             dispose();
@@ -52,7 +49,6 @@ public class menu extends JFrame {
 
 
         estadoButton.addActionListener(e -> {
-            controlador.controladorEstado();
             estadoMenu estadoMenu = new estadoMenu();
             estadoMenu.setVisible(true);
             dispose();

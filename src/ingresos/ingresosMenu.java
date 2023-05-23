@@ -17,9 +17,7 @@ public class ingresosMenu extends JFrame{
     private JTextField textField1;
     private JTable table1;
     private DefaultTableModel modelo;
-
-    productos productos = ingresos.productos.getSingletonInstance();
-
+    productos productos = ingresos.productos.obtenerInstancia();
     public ingresosMenu() {
         setTitle("Menu de ingresos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +29,6 @@ public class ingresosMenu extends JFrame{
         iniciarTabla();
         iniciarBotonesDeAccion();
     }
-
     public void iniciarBotones(){
         list1.addListSelectionListener(e -> {
             String productoSeleccionado = list1.getSelectedValue() != null ? list1.getSelectedValue().toString() : "";
@@ -42,14 +39,17 @@ public class ingresosMenu extends JFrame{
             agregarProducto(list1.getSelectedIndex(), list1.getSelectedValue());
         });
     }
-
     public void iniciarTabla(){
+        Object[] listaProductos = productos.obtenerProductosDeCola();
         modelo = new DefaultTableModel();
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
+        for (Object producto : listaProductos) {
+            Object[] fila = (Object[]) producto;
+            modelo.addRow(fila);
+        }
         table1.setModel(modelo);
     }
-
     public void iniciarBotonesDeAccion(){
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -62,11 +62,10 @@ public class ingresosMenu extends JFrame{
             }
         });
     }
-
     public void agregarProducto(int id, Object nombre) {
         boolean hayalgunProductoSeleccionado = list1.isSelectionEmpty();
         if(!hayalgunProductoSeleccionado){
-            productos.agregarProducto(id);
+            productos.agregarProducto(id, nombre.toString());
             Object[] fila = {id, nombre};
             modelo.addRow(fila);
             textField1.setText("");
@@ -75,26 +74,18 @@ public class ingresosMenu extends JFrame{
             JOptionPane.showMessageDialog(null, "Seleccione un item de la lista");
         }
     }
-
     private void regresarAMenuPrincipal() {
         menu menuPrincipal = new menu();
         menuPrincipal.setVisible(true);
         setVisible(false);
     }
-
     private void onCancel() {
-        // add your code here if necessary
         dispose();
         System.exit(0);
     }
-
-    // create method to close current window
-
-
     public static void main(String[] args) {
         ingresosMenu frame = new ingresosMenu();
         frame.pack();
         frame.setVisible(true);
     }
-
 }
