@@ -69,7 +69,6 @@ public class recursosMenu extends JFrame {
         meseros.agregarMesero(nombre, turno);
         textFieldNombre.setText("");
         listaTurnos.setSelectedIndex(0);
-        JOptionPane.showMessageDialog(null, "Mesero agregado conexito");
     }
 
     private void onOK() {
