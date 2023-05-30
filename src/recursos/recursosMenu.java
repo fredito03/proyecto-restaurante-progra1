@@ -49,6 +49,7 @@ public class recursosMenu extends JFrame {
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Turno");
+        modelo.addColumn("Siguiente Nombre");
         Object[] listaMeseros = meseros.obtenerListaMeseros();
         for (Object mesero : listaMeseros) {
             Object[] fila = (Object[]) mesero;
@@ -64,9 +65,8 @@ public class recursosMenu extends JFrame {
             JOptionPane.showMessageDialog(null, "Por favor llena todos los campos", "Error al agrega mesero", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Object[] fila = {nombre, turno};
-        modelo.addRow(fila);
         meseros.agregarMesero(nombre, turno);
+        iniciarTabla();
         textFieldNombre.setText("");
         listaTurnos.setSelectedIndex(0);
     }

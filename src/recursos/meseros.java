@@ -21,6 +21,7 @@ public class meseros {
         } else {
             nuevoMesero.anterior = cola;
             cola.siguiente = nuevoMesero;
+            cola.siguiente_nombre = nuevoMesero.nombre;
             cola = nuevoMesero;
         }
     }
@@ -28,7 +29,7 @@ public class meseros {
         ArrayList<Object> lista = new ArrayList<>();
         MeseroNode current = cabeza;
         while (current != null) {
-            Object[] mesero = {current.nombre, current.turno};
+            Object[] mesero = {current.nombre, current.turno, current.siguiente_nombre};
             lista.add(mesero);
             current = current.siguiente;
         }
@@ -40,12 +41,14 @@ public class meseros {
         private String turno;
         private MeseroNode anterior;
         private MeseroNode siguiente;
+        private String siguiente_nombre;
 
         public MeseroNode(String nombre, String turno) {
             this.nombre = nombre;
             this.turno = turno;
             this.anterior = null;
             this.siguiente = null;
+            this.siguiente_nombre = null;
         }
     }
 }

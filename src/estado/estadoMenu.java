@@ -46,6 +46,7 @@ public class estadoMenu extends JFrame {
         modeloMeseros = new DefaultTableModel();
         modeloMeseros.addColumn("Nombre");
         modeloMeseros.addColumn("Turno");
+        modeloMeseros.addColumn("Siguiente Nombre");
         Object[] listaMeseros = meseros.obtenerListaMeseros();
         for (Object mesero : listaMeseros) {
             Object[] fila = (Object[]) mesero;
